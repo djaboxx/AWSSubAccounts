@@ -15,11 +15,14 @@ We're going to manage all of our sub-accounts from one workspace. In this worksp
 ![TFE Workspace Create](./images/tfe_workspace_create.png)
 
 ### Workspace Variable Setup
+```bash
 push_vault_env Darnold-AWS-Global AWSSubAccounts
-[push_vault code ](https://gist.github.com/djaboxx/f6d7c6adac9b18028e9ef347c14eb89d)
 
 push_aws Darnold-AWS-Global AWSSubAccounts
-[push_aws code ](https://gist.github.com/djaboxx/a6ef280f16495b7c533a7b9ddd807acc)
 
 source ~/.tfe/Darnold-AWS-Global
 tfe pushvars -name ${TFE_ORG}/AWSSubAccounts -var "aws_account_email=${AWS_ACCOUNT_EMAIL}" -var "aws_account_name=${AWS_ACCOUNT_NAME}"
+```
+
+[push_vault_env code ](https://gist.github.com/djaboxx/f6d7c6adac9b18028e9ef347c14eb89d)
+[push_aws code ](https://gist.github.com/djaboxx/a6ef280f16495b7c533a7b9ddd807acc)
