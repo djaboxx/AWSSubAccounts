@@ -24,6 +24,27 @@ source ~/.tfe/Darnold-AWS-Global
 tfe pushvars -name ${TFE_ORG}/AWSSubAccounts -var "aws_account_email=${AWS_ACCOUNT_EMAIL}" -var "aws_account_name=${AWS_ACCOUNT_NAME}"
 ```
 
+```bash
+function push_vault_env {
+   WS=${2}
+   tfe_org=${1}
+   source ~/.tfe/${tfe_org}
+   tfe pushvars -name ${tfe_org}/${WS} \
+   -senv-var "VAULT_TOKEN=${VAULT_TOKEN}" \
+   -env-var "VAULT_ADDR=${VAULT_ADDR}"
+}
+```
 [push_vault_env code ](https://gist.github.com/djaboxx/f6d7c6adac9b18028e9ef347c14eb89d)
 
+```bash
+function push_aws {
+  WS=${2}
+  tfe_org=${1}
+  source ~/.tfe/${tfe_org}
+  tfe pushvars -name ${tfe_org}/${WS} \
+  -senv-var "AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}" \
+  -senv-var "AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}" \
+  -env-var AWS_DEFAULT_REGION=us-east-1 
+}
+```
 [push_aws code ](https://gist.github.com/djaboxx/a6ef280f16495b7c533a7b9ddd807acc)
